@@ -44,9 +44,10 @@ const NoteInput = () => {
             <p className="error-container" >{errMsg}</p>
             <p className='success-container'>{successMsg}</p>
             <form onSubmit={submit} onChange={handleChange}>
-                <input type="text" name="topic" placeholder="note topic"></input>
-                <input type="text" name="header" placeholder="note header"></input>
-                <input type="text" name="body" placeholder="note text" ></input>
+                <input type="text" name="topic" placeholder="note topic" className='text-container'></input>
+                <input type="text" name="header" placeholder="note header" className='text-container'></input>
+                <input type="text" name="body" placeholder="note text" className='text-container'></input>
+                <input type="text" name="wiki" placeholder="add a wikipedia search for extra info" className='text-container'></input>
                 <input className="btn container-button" type="submit" value="submit note"></input>
             </form>
         </div>

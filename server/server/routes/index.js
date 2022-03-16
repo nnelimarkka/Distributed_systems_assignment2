@@ -2,12 +2,39 @@ var express = require('express');
 var router = express.Router();
 const xml2js = require("xml2js");
 const moment = require("moment");
+const fetch = require("node-fetch");
 var fs = require("fs");
 const { parse } = require('path');
 const fileDir = "../data/";
 
-router.post("/save", (req, res) => {
+router.post("/save", async (req, res) => {
   console.log(req.body);
+  let wikiLink = "";
+
+  //fetching wikipedia article
+  if (req.body.wiki.length > 0) {
+    var url = "https://en.wikipedia.org/w/api.php"; 
+
+    var params = {
+        action: "opensearch",
+        search: req.body.wiki,
+        limit: "1",
+        namespace: "0",
+        format: "json"
+    };
+
+    url = url + "?origin=*";
+    Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];})
+
+    let response = await fetch(url);
+    let data = await response.json();
+
+    if (data[3][0]) {
+      console.log(data[3][0]);
+      wikiLink = data[3][0];
+    }
+  }
+
   fs.readFile(fileDir+"data.xml", (err, data) => {
     if (err) throw new Error(err);
 
@@ -22,7 +49,7 @@ router.post("/save", (req, res) => {
         let topicFound = false;
         for (let key in response.data.topic) {
           if (req.body.topic === response.data.topic[key].$.name) {
-            response.data.topic[key].note.push({"$": {"name": req.body.header}, "text": req.body.body, "timestamp": moment(new Date()).format("MM/DD/YY - HH:MM:SS")})
+            response.data.topic[key].note.push({"$": {"name": req.body.header}, "text": req.body.body, "timestamp": moment(new Date()).format("MM/DD/YY - HH:MM:SS"), "wikiInfo": wikiLink})
             topicFound = true;
           }
         }
@@ -34,7 +61,8 @@ router.post("/save", (req, res) => {
               {
                 "$": {"name": req.body.header},
                 "text": req.body.body,
-                "timestamp": moment(new Date()).format("MM/DD/YY - HH:MM:SS")
+                "timestamp": moment(new Date()).format("MM/DD/YY - HH:MM:SS"),
+                "wikiInfo": wikiLink
               }
             ]
           })

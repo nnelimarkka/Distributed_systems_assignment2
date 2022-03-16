@@ -31,6 +31,16 @@
       <text>I like batman</text>
       <timestamp>03/15/22 - 15:03:02</timestamp>
     </note>
+    <note name="I like cheese">
+      <text>Gouda is my favourite</text>
+      <timestamp>03/16/22 - 16:03:86</timestamp>
+      <wikiInfo>https://en.wikipedia.org/wiki/Gouda</wikiInfo>
+    </note>
+    <note name="I like cheese also">
+      <text>My favourite is Caravane cheese</text>
+      <timestamp>03/16/22 - 17:03:39</timestamp>
+      <wikiInfo>https://en.wikipedia.org/wiki/Caravane_cheese</wikiInfo>
+    </note>
   </topic>
   <topic name="random topic also">
     <note name="this is random">

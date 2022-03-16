@@ -4,6 +4,18 @@ body {
   white-space: pre-line;
 }
 
+input {
+  margin-top: 10px;
+  display: block;
+}
+
+input.text-container {
+  padding: auto;
+  margin-top: 10px;
+  min-width: 500px;
+  min-height: auto;
+}
+
 .container {
   text-align: center;
 }

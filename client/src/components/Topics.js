@@ -50,6 +50,12 @@ const Topics = () => {
                                        <p>
                                             {note.text}
                                         </p>
+                                        {note?.wikiInfo?.length > 0 &&
+                                        <h4>More info:</h4>
+                                        }
+                                        {note?.wikiInfo?.length > 0 &&
+                                        <a href={note.wikiInfo}>{note.wikiInfo}</a>
+                                        }
                                     </div>
                                 )
                             })
